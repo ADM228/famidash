@@ -182,6 +182,8 @@ uint32_t __fastcall__ hexToDec (uint16_t input);
     __A__ = MSB(word), \
     __asm__("sta %v+1, y", arr))
 
+#define uint32_inc(long) (__asm__("inc %v+0 \n bne %s", long, __LINE__), __asm__("inc %v+1 \n bne %s", long, __LINE__), __asm__("inc %v+2 \n bne %s", long, __LINE__), __asm__("inc %v+3 \n  %s:", long, __LINE__))
+
 // store a word's high and low bytes into separate places
 #define storeWordSeparately(word, low, high) \
                             (__AX__ = word, \
