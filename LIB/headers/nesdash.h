@@ -83,6 +83,14 @@ void __fastcall__ _one_vram_buffer_repeat(uint32_t args);
 void __fastcall__ _draw_padded_text(uint32_t args);
 
 /**
+ * @brief Replace a metatile in the collision map and VRAM to a new one specified.
+ *
+ * @param metatile The metatile to replace it with.
+ * @note X and Y coordinates are supplied via @c temp_x, @c temp_y and @c temp_room.
+ */
+void replace_metatile(uint8_t metatile);
+
+/**
  * @brief Play a raw PCM sample. Hangs the game until done.
  *
  * @note Sample parameters (offset, bank, sample rate) are specified in tables inside the routine and found by the @c sample parameter. 

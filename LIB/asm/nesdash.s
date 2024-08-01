@@ -91,12 +91,16 @@ sprite_data = _sprite_data
 
 ; Standard for function declaration here:
 ; C function name
-; .segment declaration
+;.segment declaration
 ; [ <empty line>
-; imports ]
+;.import declarations ]
 ; <empty line>
-; .export declaration
+;.export declaration
+;.proc name
 ; the function itself
+;.endif
+; <empty line>
+; <empty line>
 
 ; void __fastcall__ oam_meta_spr_flipped(uint8_t x,uint8_t y,const void *data);
 .segment "XCD_BANK_04"
@@ -1204,7 +1208,6 @@ found_bank:
 
 .if .not(useConstInitPtr)
 music_data_locations_lo:
-	.out "shit"
 	.byte <music_data_famidash_music1, <music_data_famidash_music2, <music_data_famidash_music3, <music_data_famidash_music4, <music_data_famidash_music5
 music_data_locations_hi:
 	.byte >music_data_famidash_music1, >music_data_famidash_music2, >music_data_famidash_music3, >music_data_famidash_music4, >music_data_famidash_music5
@@ -2288,16 +2291,17 @@ drawplayer_common := _drawplayerone::common
         .byte >_MINI_CUBE2, >_MINI_SHIP2, >_MINI_BALL2, >_MINI_UFO2, >_MINI_ROBOT2, >_MINI_SPIDER2, >_MINI_WAVE2, >_MINI_SWING2, <_MINI_CUBE2
 .endproc
 
-; char bg_collision_sub();
+; No C name
 .segment "CODE_2"
 
-.importzp _temp_x, _temp_y, _temp_room, _collision
+.importzp _temp_x, _temp_y, _temp_room
 
-.export _bg_collision_sub
-.proc _bg_collision_sub
-    ; Returns collision block indexed by
+.export get_metatile_coords
+.proc get_metatile_coords
+    ; Returns block index by
 	; temp_x for X
 	; temp_room and y for Y
+	; in ptr1+Y
     LDA _temp_y     ;
     CMP #$F0        ;   if(temp_y >= 0xf0) return 0;
     BCS Return0		;__
@@ -2318,23 +2322,136 @@ drawplayer_common := _drawplayerone::common
 	LDA #$00
 	STA ptr1
 
-	.if USE_ILLEGAL_OPCODES
-		LAX (ptr1),Y
-	.else
-		LDA (ptr1),Y
-		TAX
-	.endif
+	RTS
+
+	Return0:
+		LDA #$00
+		RTS
+.endproc
+
+; char bg_collision_sub();
+.segment "CODE_2"
+
+.importzp _collision
+
+.export _bg_collision_sub
+.proc _bg_collision_sub
+	JSR get_metatile_coords
+	LDA	(ptr1), Y
+	TAX				;
 	LDA metatiles_coll,X	;	return is_solid[collision];
 	STA _collision	;
 	RTS				;__
+.endproc
 
-	Return0:
-	LDA #$00
-	sta _collision
-	RTS
+; void replace_metatile(uint8_t metatile)
+.segment "CODE_2"
+
+.global metatiles_top_left, metatiles_top_right, metatiles_bot_left, metatiles_bot_right, metatiles_attr
+
+.export _replace_metatile
+.proc _replace_metatile
+	addrHiOff = 0
+	addrLoOff = 1
+	dataOff = 2
+	writeLen = 3
+	vramWriteA = writeLen*0
+	vramWriteB = writeLen*1
+	vramWriteC = writeLen*2
+	vramWriteD = writeLen*3
+	vramWriteE = writeLen*4
+	totalLen = writeLen*5
+	finishIndex = totalLen
+
+
+	tile = tmp2
+	attrTmp = tmp3
+
+	replaceInCollMap:
+		PHA						;
+		JSR	get_metatile_coords	;	Easy part: replace metatile in collision map
+		PLA						;
+		STA	(ptr1),	Y			;__
+		STY	ptr1+1
+		STA tile
+
+	switchToTileBank:
+		LDA	mmc3PRG1Bank				;
+		PHA								;	Switch to bank with metatile data
+		LDA	#<.bank(metatiles_top_left)	;
+		JSR	mmc3_set_prg_bank_1			;__
+
+	writeTileData:
+		LDX VRAM_INDEX
+		; Maybe compare against the vram buffer size here
+		LDY tile
+		LDA	metatiles_top_left,	Y
+		STA	vramWriteA+dataOff,	X
+		LDA	metatiles_top_right,	Y
+		STA	vramWriteB+dataOff,	X
+		LDA	metatiles_bot_left,	Y
+		STA	vramWriteC+dataOff,	X
+		LDA	metatiles_bot_right,	Y
+		STA	vramWriteD+dataOff,	X
+
+	getAttrData:
+		; Read lower right metatile
+		LDY #$11
+		.if USE_ILLEGAL_OPCODES
+			lax (ptr1),y
+		.else
+			LDA	(ptr1),Y
+			tax
+		.endif
+		; Read lower left metatile
+		dey
+		LDA (ptr1), Y
+		tay
+		; Get their attributes
+		lda metatiles_attr,x	; Lower right
+		ASL
+		ASL
+		ora metatiles_attr,y	; Lower left
+		STA attrTmp
+
+		; Read upper right metatile
+		LDY #$01
+		.if USE_ILLEGAL_OPCODES
+			lax (ptr1),y
+		.else
+			LDA	(ptr1),Y
+			tax
+		.endif
+		; Read upper left metatile
+		dey
+		LDA (ptr1), Y
+		tay
+		; Get their attributes
+		lda metatiles_attr,x	; Upper right
+		ASL
+		ASL
+		ora metatiles_attr,y	; Upper left
+
+		; Combine
+		LDY attrTmp	; Y has the lower metatile attrs, will shift by 4
+		ORA shiftBy4table,Y
+		LDX	VRAM_INDEX
+		STA vramWriteE+dataOff,	X
+
+	setTileAddr:
+		; do tile address getting and setting shit here
+
+	setAttrAddr:
+		; do attr address getting and setting shit here
+
+	finish:
+		PLA
+		JMP mmc3_set_prg_bank_1
 
 .endproc
 
+
+; No single C name
 .segment "CODE_2"
 
 .export crossPRGBankJump
