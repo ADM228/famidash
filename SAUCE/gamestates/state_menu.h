@@ -187,6 +187,8 @@ void levelselection() {
 	vram_adr(NAMETABLE_A);
 	vram_unrle(game_main_menu);   
 
+	memfill(attemptCounter, 0, sizeof(attemptCounter));
+
 	refreshmenu();
 
 	// one_vram_buffer(0xb0+TOTALCOINSTENS, NTADR_A(17,17));
@@ -194,7 +196,6 @@ void levelselection() {
 
 	cube_rotate[0] = 0;
 	cube_rotate[1] = 0;
-	attempts = 0;
 
 	ppu_on_all();
 	pal_fade_to_withmusic(0,4);
