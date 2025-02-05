@@ -383,12 +383,14 @@ void state_game(){
 		
 		if ((controllingplayer->press_b) && practice_point_count && !(twoplayer && (options & oneptwoplayer))) crossPRGBankJump0(reset_game_vars);
 
-		if (joypad1.press_right && DEBUG_MODE && !(options & platformer)) {
-			invert_gravity(currplayer_gravity);
-		}
-		
-		if (joypad1.press_down && DEBUG_MODE) {
-			currplayer_mini ^= 1;
+		if (DEBUG_MODE) {
+			if (joypad1.press_right && !(options & platformer)) {
+				invert_gravity(currplayer_gravity);
+				update_currplayer_table_idx();
+			} if (joypad1.press_down) {
+				currplayer_mini ^= 1;
+				update_currplayer_table_idx();
+			}
 		}
 
 		if (joypad1.select && DEBUG_MODE) {

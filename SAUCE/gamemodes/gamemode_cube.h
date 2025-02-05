@@ -237,29 +237,35 @@ void cube_movement(){
 
 
 void common_gravity_routine() {
-	register int16_t tempvel;
-	if (!dashing[currplayer]) {
-		tempvel = tmpgravity;
-		if((!currplayer_gravity ? currplayer_vel_y : -currplayer_vel_y) > tmpfallspeed){
-			tempvel = -tempvel;
+	register int16_t tmpaccel;
+	if (dashing[currplayer] == 0) {
+		tmpaccel = tmpgravity;
+		if((!currplayer_gravity ? currplayer_vel_y > tmpfallspeed : currplayer_vel_y < tmpfallspeed)){
+			tmpaccel = -tmpaccel;
 		}
 			switch (gravity_mod) {
 				case 0: break;
-				case 1: tempvel /= 3; break;
-				case 2: __AX__ = (tempvel); __AX__ /= 2; tempvel = __AX__; break;
-				case 3: tempvel = (tempvel / 3 * 2); break;
-				case 4: tempvel *= 2; break;
+				case 1: tmpaccel /= 3; break;
+				case 2: __AX__ = (tmpaccel); __AX__ /= 2; tmpaccel = __AX__; break;
+				case 3: tmpaccel = (tmpaccel / 3 * 2); break;
+				case 4: tmpaccel *= 2; break;
 			};
-		currplayer_vel_y += tempvel;
+		currplayer_vel_y += tmpaccel;
 		currplayer_y += currplayer_vel_y;
-	}
-	
-	
-	else if (dashing[currplayer] == 2) { currplayer_vel_y = -currplayer_vel_x; currplayer_y += currplayer_vel_y; }
-	else if (dashing[currplayer] == 3) { currplayer_vel_y = currplayer_vel_x; currplayer_y += currplayer_vel_y; }	
-	else if (dashing[currplayer] == 4) { currplayer_vel_y = currplayer_vel_x*2; currplayer_y -= currplayer_vel_y; }	
-	else if (dashing[currplayer] == 5) { currplayer_vel_y = currplayer_vel_x*2; currplayer_y += currplayer_vel_y; }	
-	else currplayer_vel_y = 1;
+	} else if (dashing[currplayer] == 2) {
+		currplayer_vel_y = -currplayer_vel_x;
+		currplayer_y += currplayer_vel_y;
+	} else if (dashing[currplayer] == 3) {
+		currplayer_vel_y = currplayer_vel_x;
+		currplayer_y += currplayer_vel_y;
+	} else if (dashing[currplayer] == 4) {
+		currplayer_vel_y = currplayer_vel_x*2;
+		currplayer_y -= currplayer_vel_y;
+	} else if (dashing[currplayer] == 5) {
+		currplayer_vel_y = currplayer_vel_x*2;
+		currplayer_y += currplayer_vel_y;
+	} else
+		currplayer_vel_y = 1;
 }
 
 
