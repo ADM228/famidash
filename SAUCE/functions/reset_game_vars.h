@@ -147,6 +147,8 @@ void restore_practice_state() {
 
 	#undef quick_ld
 	currplayer_gravity = player_gravity[currplayer];
+
+	update_currplayer_table_idx();
 }
 
 CODE_BANK_POP()

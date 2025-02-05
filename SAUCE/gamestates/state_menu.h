@@ -1450,7 +1450,8 @@ void set_title_icon() {
 void roll_new_mode() {
 	speed = (newrand() & 3); 
 	if (speed == 0) speed = 1; 
-	currplayer_gravity = GRAVITY_DOWN; 
+	currplayer_gravity = GRAVITY_DOWN;
+	update_currplayer_table_idx();
 	currplayer_x_small = 0x08; 
 	currplayer_y_small = 0xA0;
 	player_vel_y[0] = 0;
@@ -1515,7 +1516,7 @@ void bounds_check() {
 	else if (currplayer_y_small < 0x08) currplayer_y_small = 0x08;	
 }	
 void title_ship_shit() {
-	if (kandoframecnt & 1) { if (!(newrand() & 7)) invert_gravity(currplayer_gravity); }
+	if (kandoframecnt & 1) { if (!(newrand() & 7)) invert_gravity(currplayer_gravity); update_currplayer_table_idx(); }
 
 	currplayer_y_small -= tmpi8;
 
@@ -1525,6 +1526,7 @@ void title_ship_shit() {
 	else if (currplayer_y_small < 0x08) { 
 		currplayer_y_small = 0x08; 
 		currplayer_gravity = GRAVITY_DOWN;
+		update_currplayer_table_idx();
 		tmpi8 = 0;
 	}					
 
@@ -1543,6 +1545,7 @@ void title_swing_shit() {
 	if (kandoframecnt & 1) { 
 		if (!(newrand() & 15)) {
 			invert_gravity(currplayer_gravity); 
+			update_currplayer_table_idx();
 		}
 	}
 
@@ -1618,7 +1621,7 @@ void title_cube_shit() {
 
 void title_wave_shit() {
 	tmp2 = newrand() & 63;
-	if (kandoframecnt & 1) { if (tmp2 >= 60) invert_gravity(currplayer_gravity); }
+	if (kandoframecnt & 1) { if (tmp2 >= 60) invert_gravity(currplayer_gravity); update_currplayer_table_idx(); }
 		
 	if (currplayer_gravity) currplayer_y_small -= speed;
 
@@ -1627,7 +1630,7 @@ void title_wave_shit() {
 }
 void title_mini_wave_shit() {
 	tmp2 = newrand() & 63;
-	if (kandoframecnt & 1) { if (tmp2 >= 60) invert_gravity(currplayer_gravity); }
+	if (kandoframecnt & 1) { if (tmp2 >= 60) invert_gravity(currplayer_gravity); update_currplayer_table_idx(); }
 		
 	if (currplayer_gravity) currplayer_y_small -= (speed << 1);
 
@@ -1637,7 +1640,7 @@ void title_mini_wave_shit() {
 
 void title_robot_shit() {
 	if (kandoframecnt & 1 && !currplayer_gravity) {
-		if (!(newrand() & 15)) { tmpi8 = newrand() & 15; currplayer_gravity = GRAVITY_UP; teleport_output = 0; }
+		if (!(newrand() & 15)) { tmpi8 = newrand() & 15; currplayer_gravity = GRAVITY_UP; update_currplayer_table_idx(); teleport_output = 0; }
 	}
 
 	if (currplayer_gravity) {

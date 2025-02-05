@@ -200,6 +200,7 @@ void cube_movement(){
 				currplayer_vel_x = jimsheatball_vel_x[tmp9 & 0x7F];
 				currplayer_vel_y = jimsheatball_vel_y[tmp9 & 0x7F];
 				currplayer_gravity = GRAVITY_DOWN;
+				update_currplayer_table_idx();
 
 				if(currplayer_vel_y > JIMSHEATBALL_MAX_FALLSPEED(framerate)){
 					currplayer_vel_y += -JIMSHEATBALL_GRAVITY(framerate);
@@ -230,6 +231,7 @@ void cube_movement(){
 	currplayer_vel_x = player_vel_x[currplayer & 0x7F];
 	currplayer_vel_y = player_vel_y[currplayer & 0x7F];
 	currplayer_gravity = player_gravity[currplayer];
+	update_currplayer_table_idx();
 	}
 	Generic.x = high_byte(currplayer_x);
 	Generic.y = high_byte(currplayer_y);
@@ -281,7 +283,10 @@ void cube_eject() {
 					currplayer_vel_y = 0xffff;
 				}
 				orbactive = 0;
-				if (fblocked[currplayer]) currplayer_gravity = GRAVITY_DOWN;
+				if (fblocked[currplayer]) {
+					currplayer_gravity = GRAVITY_DOWN;
+					update_currplayer_table_idx();
+				}
 			}
 		} 
 	//}
@@ -296,7 +301,10 @@ void cube_eject() {
 					currplayer_vel_y = 1;
 				}
 				orbactive = 0;
-				if (fblocked[currplayer]) currplayer_gravity = GRAVITY_UP;			
+				if (fblocked[currplayer]) {
+					currplayer_gravity = GRAVITY_UP;
+					update_currplayer_table_idx();
+				}
 			}
 		}
 	//}	
