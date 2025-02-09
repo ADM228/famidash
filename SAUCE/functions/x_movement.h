@@ -62,7 +62,7 @@ void x_movement(){
 
 	old_x = currplayer_x;
 	
-	currplayer_vel_x = ind16_load_NOC(CUBE_SPEED(framerate), speed);
+	currplayer_vel_x = ind16BE_load_NOC(CUBE_SPEED(framerate), speed);
 	
 	if (dashing[currplayer] == 4 || dashing[currplayer] == 5) {	
 		if (currplayer_y < 0x0600 && scroll_y == min_scroll_y){

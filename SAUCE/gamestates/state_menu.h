@@ -1291,7 +1291,7 @@ void state_menu() {
 				ppu_wait_nmi();
 				return;
 		}
-		low_byte(tmp8) += MSB(ind16_load_NOC(CUBE_SPEED(framerate), 1));
+		low_byte(tmp8) += MSB(ind16BE_load_NOC(CUBE_SPEED(framerate), 1));
 		edit_irq_table(low_byte(tmp8), 2); 
 
 /*

@@ -11,17 +11,19 @@ const uint8_t CUBE_HEIGHT[] = {0x0F, 0x07};
 #define CUBE_HEIGHT(mini) CUBE_HEIGHT[mini]
 
 // Depends on mini
-const uint8_t WAVE_WIDTH[] = {0x08, 0x04};
+const uint8_t WAVE_WIDTH[] = {0x01, 0x04};
 #define WAVE_WIDTH(mini) WAVE_WIDTH[mini]
 
 // Depends on mini
-const uint8_t WAVE_HEIGHT[] = {0x08, 0x04};
+const uint8_t WAVE_HEIGHT[] = {0x01, 0x04};
 #define WAVE_HEIGHT(mini) WAVE_HEIGHT[mini]
 
-// Depends on framerate
-const uint16_t CUBE_SPEED_50[] = {0x0352, 0x02AD, 0x0421, 0x04FD, 0x0623, 0x0170};
-const uint16_t CUBE_SPEED_60[] = {0x02C3, 0x023A, 0x036F, 0x0427, 0x051C, 0x0132};
+// These tables have been generated in big-endian.
+// Use the corresponding macros to fetch data.
+const uint16_t CUBE_SPEED_50[] = {0x5203, 0xAD02, 0x2104, 0xFD04, 0x2306, 0x7001};
+const uint16_t CUBE_SPEED_60[] = {0xC302, 0x3A02, 0x6F03, 0x2704, 0x1C05, 0x3201};
 
+// Depends on framerate
 const uint16_t * const CUBE_SPEED[] = {CUBE_SPEED_50, CUBE_SPEED_60};
 #define CUBE_SPEED(framerate) CUBE_SPEED[framerate & 0x7F]
 
@@ -67,7 +69,7 @@ const uint8_t SPIDER_MAX_FALLSPEED_lo[] = {0x33, 0xCD, 0x33, 0xCD, 0xFD, 0x03, 0
 const uint8_t SPIDER_MAX_FALLSPEED_hi[] = {0x07, 0xF8, 0x07, 0xF8, 0x05, 0xFA, 0x05, 0xFA};
 #define SPIDER_MAX_FALLSPEED(table_idx) (lohi_arr16_load(SPIDER_MAX_FALLSPEED, table_idx))
 
-const uint8_t SWING_MAX_FALLSPEED_lo[] = {0xC6, 0x3A, 0xC6, 0x3A, 0xCE, 0x32, 0xCE, 0x32};
+const uint8_t SWING_MAX_FALLSPEED_lo[] = {0x06, 0xFA, 0x06, 0xFA, 0x2E, 0xD2, 0x2E, 0xD2};
 const uint8_t SWING_MAX_FALLSPEED_hi[] = {0x05, 0xFA, 0x05, 0xFA, 0x04, 0xFB, 0x04, 0xFB};
 #define SWING_MAX_FALLSPEED(table_idx) (lohi_arr16_load(SWING_MAX_FALLSPEED, table_idx))
 
