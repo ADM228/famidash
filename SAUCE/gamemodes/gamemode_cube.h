@@ -77,6 +77,7 @@ void cube_movement(){
 
 					if (make_cube_jump_higher) {
 						if ((currplayer_slope_type & SLOPE_DEGREES_MASK) != SLOPE_22DEG) {
+							// TODO
 							currplayer_vel_y += (currplayer_gravity ? 0x80 : -0x80);
 						}
 						make_cube_jump_higher = 0;
@@ -91,6 +92,7 @@ void cube_movement(){
 
 				if (make_cube_jump_higher) {
 					if ((currplayer_slope_type & SLOPE_DEGREES_MASK) != SLOPE_22DEG) {
+						// TODO
 						currplayer_vel_y += (currplayer_gravity ? 0x80 : -0x80);
 					}
 					make_cube_jump_higher = 0;

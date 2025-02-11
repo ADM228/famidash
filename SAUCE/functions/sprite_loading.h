@@ -929,10 +929,9 @@ void sprite_collide_lookup() {
 		clear_slope_stuff();
 		if (!currplayer_gravity) { 
 			settrailstuff();
-			// INTENTIONALLY do this before flipping gravity
-			currplayer_vel_y = PAD_HEIGHT_BLUE(currplayer_table_idx);
 			currplayer_gravity = GRAVITY_UP;				//flip gravity
 			update_currplayer_table_idx();
+			currplayer_vel_y = PAD_HEIGHT_BLUE(currplayer_table_idx);
 			//invincible_counter = 3;
 		}
 		idx8_inc(activesprites_activated, index);
@@ -942,10 +941,9 @@ void sprite_collide_lookup() {
 		clear_slope_stuff();
 		if (currplayer_gravity) { 	
 			settrailstuff();
-			// INTENTIONALLY do this before flipping gravity
-			currplayer_vel_y = PAD_HEIGHT_BLUE(currplayer_table_idx);
 			currplayer_gravity = GRAVITY_DOWN;				//flip gravity
 			update_currplayer_table_idx();
+			currplayer_vel_y = PAD_HEIGHT_BLUE(currplayer_table_idx);
 			//invincible_counter = 3;				
 		}
 		idx8_inc(activesprites_activated, index);	
@@ -1136,6 +1134,7 @@ void retrofireballclear() {
 void dual_cap_check() {
 	if (dual && !twoplayer) {
 		if (currplayer == 0) {
+			// TODO
 			if (player_vel_y[1] > 0x250) player_vel_y[1] = 0x250;
 			if (player_vel_y[1] < -0x250) player_vel_y[1] = -0x250;
 		}
