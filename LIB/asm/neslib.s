@@ -10,7 +10,7 @@
 ;minor change %%, added ldx #0 to functions returning char
 ;removed sprid from c functions to speed them up
 
-  .import _use_auto_chrswitch
+	.import _use_auto_chrswitch
 
 	.export _pal_all,_pal_bg,_pal_spr,_pal_clear
 	.export _pal_bright
