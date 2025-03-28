@@ -1,0 +1,515 @@
+{
+	"main": [
+		{
+			"songTitle": "song_menu_theme",
+			"lowerText": "MENU",
+			"vsSystemEnabled": false,
+			"nsfData": {
+				"trackTitle": "Menu Theme",
+				"artist": {
+					"original": "RobTop",
+					"cover": "Zenith302"
+				},
+				"durationNTSC": 30017,
+				"durationPAL": 36080,
+				"looped": true
+			}
+		},
+		{
+			"songTitle": "song_stereo_madness",
+			"upperText": "STEREO ",
+			"lowerText": "MADNESS",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Stereo Madness",
+				"artist": {
+					"original": "ForeverBound",
+					"cover": "Zenith302, UserSniper"
+				},
+				"durationNTSC": 85550,
+				"durationPAL": 102840
+			}
+		},
+		{
+			"songTitle": "song_back_on_track",
+			"upperText": "BACK ON",
+			"lowerText": "TRACK",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Back On Track",
+				"artist": {
+					"original": "DJVI",
+					"cover": ""
+				},
+				"durationNTSC": 82817,
+				"durationPAL": 99540
+			}
+		},
+		{
+			"songTitle": "song_polargeist",
+			"lowerText": "POLARGEIST",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Polargeist",
+				"artist": {
+					"original": "Step",
+					"cover": ""
+				},
+				"durationNTSC": 90700,
+				"durationPAL": 109000
+			}
+		},
+		{
+			"songTitle": "song_dry_out",
+			"lowerText": "DRY OUT",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Dry Out",
+				"artist": {
+					"original": "DJVI",
+					"cover": ""
+				},
+				"durationNTSC": 81433,
+				"durationPAL": 97880
+			}
+		},
+		{
+			"songTitle": "song_base_after_base",
+			"upperText": "BASE AFTER",
+			"lowerText": "BASE",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Base After Base",
+				"artist": {
+					"original": "DJVI",
+					"cover": ""
+				},
+				"durationNTSC": 85000,
+				"durationPAL": 102160
+			}
+		},
+		{
+			"songTitle": "song_cant_let_go",
+			"lowerText": "CANT LET GO",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Cant Let Go ~ Can't Let Go",
+				"artist": {
+					"original": "DJVI",
+					"cover": ""
+				},
+				"durationNTSC": 80750,
+				"durationPAL": 97040
+			}
+		},
+		{
+			"songTitle": "song_jumper",
+			"lowerText": "JUMPER",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Jumper",
+				"artist": {
+					"original": "Waterflame",
+					"cover": ""
+				},
+				"durationNTSC": 86467,
+				"durationPAL": 104100
+			}
+		},
+		{
+			"songTitle": "song_time_machine",
+			"lowerText": "TIME MACHINE",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Time Machine",
+				"artist": {
+					"original": "Waterflame",
+					"cover": ""
+				},
+				"durationNTSC": 96067,
+				"durationPAL": 115460
+			}
+		},
+		{
+			"songTitle": "song_cycles",
+			"lowerText": "CYCLES",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Cycles",
+				"artist": {
+					"original": "DJVI",
+					"cover": ""
+				},
+				"durationNTSC": 85933,
+				"durationPAL": 103280
+			}
+		},
+		{
+			"songTitle": "song_xstep",
+			"lowerText": "XSTEP",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "xStep",
+				"artist": {
+					"original": "DJVI",
+					"cover": ""
+				},
+				"durationNTSC": 82350,
+				"durationPAL": 98980
+			}
+		},
+		{
+			"songTitle": "song_clutterfunk",
+			"lowerText": "CLUTTERFUNK",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Clutterfunk",
+				"artist": {
+					"original": "Waterflame",
+					"cover": ""
+				},
+				"durationNTSC": 96583,
+				"durationPAL": 116080
+			}
+		},
+		{
+			"songTitle": "song_theory_of_everything",
+			"upperText": "THEORY OF",
+			"lowerText": "EVERYTHING",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Theory Of Everything",
+				"artist": {
+					"original": "Dj-Nate",
+					"cover": ""
+				},
+				"durationNTSC": 89000,
+				"durationPAL": 106960
+			}
+		},
+		{
+			"songTitle": "song_electroman_adventures",
+			"upperText": "ELECTROMAN",
+			"lowerText": "ADVENTURES",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Electroman Adventures",
+				"artist": {
+					"original": "Waterflame",
+					"cover": ""
+				},
+				"durationNTSC": 87800,
+				"durationPAL": 105520
+			}
+		},
+		{
+			"songTitle": "song_clubstep",
+			"lowerText": "CLUBSTEP",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_electrodynamix",
+			"lowerText": "ELECTRODYNAMIX",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_hexagon_force",
+			"upperText": "HEXAGON",
+			"lowerText": "FORCE",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_blast_processing",
+			"upperText": "BLAST",
+			"lowerText": "PROCESSING",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_toe_2",
+			"upperText": "THEORY OF",
+			"lowerText": "EVERYTHING 2",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_geometrical_dominator",
+			"upperText": "GEOMETRICAL",
+			"lowerText": "DOMINATOR",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_deadlocked",
+			"lowerText": "DEADLOCKED",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_fingerdash",
+			"lowerText": "FINGERDASH",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_dash",
+			"lowerText": "DASH",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_endgame",
+			"lowerText": "DECODE",
+			"vsSystemEnabled": true,
+			"nsfData": {
+				"trackTitle": "Decode ~ Endgame",
+				"artist": {
+					"original": "Waterflame",
+					"cover": ""
+				},
+				"durationNTSC": 79283,
+				"durationPAL": 95280
+			}
+		},
+		{
+			"songTitle": "song_practice",
+			"lowerText": "PRACTICE",
+			"vsSystemEnabled": false,
+			"nsfData": {
+				"trackTitle": "Practice ~ Stay Inside Me",
+				"artist": {
+					"original": "OcularNebula",
+					"cover": ""
+				},
+				"durationNTSC": 239817,
+				"durationPAL": 288380,
+				"looped": true
+			}
+		},
+		{
+			"songTitle": "song_retray",
+			"lowerText": "RETRAY",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_infernoplex",
+			"lowerText": "INFERNOPLEX",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_problematic",
+			"lowerText": "PROBLEMATIC",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_stereo_madness_2",
+			"upperText": "STEREO ",
+			"lowerText": "MADNESS 2",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_eon",
+			"lowerText": "EON",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_death_moon",
+			"lowerText": "DEATH MOON",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_scheming_weasel",
+			"upperText": "SCHEMING",
+			"lowerText": "WEASEL",
+			"vsSystemEnabled": false
+		},
+		{
+			"songTitle": "song_the_challenge",
+			"upperText": "THE",
+			"lowerText": "CHALLENGE",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_atthespeedoflight",
+			"upperText": "AT THE SPEED",
+			"lowerText": "OF LIGHT",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_atthespeedoflight2",
+			"upperText": "AT THE SPEED",
+			"lowerText": "OF LIGHT PT 2",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_midnight",
+			"lowerText": "MIDNIGHT",
+			"vsSystemEnabled": true
+		},
+		{
+			"_comment": {
+				"songTitle": "song_crackdown",
+				"upperText": "OKIBA",
+				"lowerText": "CRACKDOWN",
+				"vsSystemEnabled": true
+			}
+		},
+		{
+			"songTitle": "song_stalemate",
+			"lowerText": "STALEMATE",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_haunted_woods",
+			"lowerText": "HAUNTED WOODS",
+			"vsSystemEnabled": true
+		},
+		{
+			"_comment": {
+				"songTitle": "song_chaozfantasy",
+				"lowerText": "CHAOZ FANTASY",
+				"vsSystemEnabled": true
+			}
+		},
+		{
+			"songTitle": "song_just_right",
+			"lowerText": "JUST RIGHT",
+			"vsSystemEnabled": false
+		},
+		{
+			"songTitle": "song_against_the_odds_redux",
+			"upperText": "8 BIT AGAINST",
+			"lowerText": "THE ODDS REDUX",
+			"vsSystemEnabled": true
+		},
+		{
+			"songTitle": "song_driving_by_night",
+			"upperText": "DRIVING BY",
+			"lowerText": "NIGHT",
+			"vsSystemEnabled": true
+		}
+	],
+	"SFX": [
+		{
+			"text": "DEATH",
+			"nsfData": {
+				"trackTitle": "Death SFX",
+				"artist": "UserSniper",
+				"durationNTSC": 383,
+				"durationPAL": 460
+			}
+		},
+		{
+			"text": "CLICK",
+			"nsfData": {
+				"trackTitle": "Click SFX",
+				"artist": "UserSniper",
+				"durationNTSC": 50,
+				"durationPAL": 40
+			}
+		},
+		{
+			"text": "LEVEL$COMPLETE",
+			"nsfData": {
+				"trackTitle": "LEVEL COMPLETE! SFX",
+				"artist": "UserSniper",
+				"durationNTSC": 3167,
+				"durationPAL": 3020
+			}
+		},
+		{
+			"text": "COIN",
+			"nsfData": {
+				"trackTitle": "Coin SFX",
+				"artist": "UserSniper",
+				"durationNTSC": 683,
+				"durationPAL": 700
+			}
+		},
+		{
+			"text": "CHEST$OPEN",
+			"nsfData": {
+				"trackTitle": "Chest Open SFX",
+				"artist": "UserSniper",
+				"durationNTSC": 100,
+				"durationPAL": 120
+			}
+		},
+		{
+			"text": "ORBS",
+			"nsfData": {
+				"trackTitle": "Orbs SFX",
+				"artist": "UserSniper",
+				"durationNTSC": 683,
+				"durationPAL": 820
+			}
+		},
+		{
+			"text": "DIAMONDS",
+			"nsfData": {
+				"trackTitle": "Diamonds SFX",
+				"artist": "UserSniper",
+				"durationNTSC": 683,
+				"durationPAL": 820
+			}
+		},
+		{
+			"text": "EXIT$LEVEL",
+			"nsfData": {
+				"trackTitle": "Exit Level SFX",
+				"artist": "UserSniper",
+				"durationNTSC": 650,
+				"durationPAL": 680
+			}
+		},
+		{
+			"text": "START$LEVEL",
+			"nsfData": {
+				"trackTitle": "Start Level SFX",
+				"artist": "UserSniper",
+				"durationNTSC": 967,
+				"durationPAL": 920
+			}
+		},
+		{
+			"text": "INVALID",
+			"nsfData": {
+				"trackTitle": "Invalid SFX",
+				"artist": "UserSniper",
+				"durationNTSC": 633,
+				"durationPAL": 640
+			}
+		},
+		{
+			"text": "ACHIEVEMENT$GET",
+			"nsfData": {
+				"trackTitle": "Achievement Get SFX",
+				"artist": "UserSniper",
+				"durationNTSC": 950,
+				"durationPAL": 1140
+			}
+		}
+	],
+	"PCM": [
+		{
+			"segment": "PCM_BANK",
+			"path": "MUSIC/PCM/SSDPCM2-geometryDash.pcm",
+			"symbol": "GeometryDashPCMA",
+			"sampleRateNTSC": 4,
+			"sampleRatePAL": 3,
+			"nsfData": {
+				"trackTitle": "Geometry Dash Voice Clip",
+				"artist": "VA: MDK",
+				"durationNTSC": 1150,
+				"durationPAL": 1100
+			}
+		},
+		{
+			"segment": "PCM_BANK_B",
+			"path": "MUSIC/PCM/SSDPCM2-fire.pcm",
+			"symbol": "GeometryDashPCMB",
+			"sampleRateNTSC": 10,
+			"sampleRatePAL": 8,
+			"nsfData": {
+				"trackTitle": "FIRE IN THE HOLE! Voice Clip",
+				"artist": "VA: Joe",
+				"durationNTSC": 1650,
+				"durationPAL": 1650
+			}
+		}
+	]
+}
