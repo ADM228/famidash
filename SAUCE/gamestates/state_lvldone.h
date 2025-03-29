@@ -417,101 +417,6 @@ const unsigned char bgmtestscreen[];
 #include "MUSIC/EXPORTS/music_soundTestTables.h"
 #include "MUSIC/EXPORTS/sfx_soundTestTables.h"
 
-#if !__VS_SYSTEM
-
-const uint8_t xbgm_lookup_table2[] = {
-	song_menu_theme,
-	song_stereo_madness,
-	song_back_on_track,
-	song_polargeist,
-	song_dry_out,
-	song_base_after_base,
-	song_cant_let_go,
-	song_jumper,
-	song_time_machine,
-	song_cycles,
-	song_xstep, 
-	song_clutterfunk,
-	song_theory_of_everything, 
-	song_electroman_adventures, 
-	song_clubstep,
-	song_electrodynamix,
-	song_hexagon_force,
-	song_blast_processing,
-	song_toe_2,
-	song_geometrical_dominator,
-	song_deadlocked,
-	song_fingerdash,
-	song_dash,
-	song_endgame, 
-	song_practice,
-	song_retray,
-	song_infernoplex,
-	song_problematic,
-	song_stereo_madness_2,
-	song_eon,
-	song_death_moon,
-	song_scheming_weasel,
-	song_the_challenge,
-	song_atthespeedoflight,
-	song_atthespeedoflight2,
-	song_midnight,
-//	song_crackdown,
-	song_stalemate,
-	song_haunted_woods,
-//	song_chaozfantasy,
-	song_just_right,
-	song_against_the_odds_redux,
-	song_driving_by_night,
-};
-
-#else
-
-const uint8_t xbgm_lookup_table2[] = {
-	song_menu_theme,
-	song_stereo_madness,
-	song_back_on_track,
-	song_polargeist,
-	song_dry_out,
-	song_base_after_base,
-	song_cant_let_go,
-	song_jumper,
-	song_time_machine,
-
-	song_cycles,
-	song_stalemate,
-	song_xstep, 
-	song_clutterfunk,
-	song_theory_of_everything, 
-	song_haunted_woods,
-	song_against_the_odds_redux,
-	song_electroman_adventures, 
-	song_clubstep,
-	song_electrodynamix,
-	song_hexagon_force,
-	song_blast_processing,
-	song_toe_2,
-	song_endgame, 
-	song_retray,
-	song_infernoplex,
-	song_problematic,
-	song_stereo_madness_2,
-	song_eon,
-	song_death_moon,
-	song_the_challenge,
-	song_atthespeedoflight,
-	song_atthespeedoflight2,
-	song_midnight,
-//	song_crackdown,
-	song_just_right,
-	song_practice,
-	song_scheming_weasel,
-};
-
-#endif
-
-
-
 const char TEXT_debug_mode[] = "DEBUG MODE ENABLED";
 
 //#include "defines/bgm_charmap.h"
@@ -555,7 +460,7 @@ void bgmtest() {
 				if ((mouse.y >= 0xB4 && mouse.y <= 0xBB)) {		
 					if (settingvalue == 1) { sfx_play(sfx, 0); }
 					else {
-						if (!temptemp6) { music_play(xbgm_lookup_table2[song]); temptemp6 = 1; songplaying = 1; }
+						if (!temptemp6) { music_play(xbgmlookuptable[song]); temptemp6 = 1; songplaying = 1; }
 						else { famistudio_music_stop(); music_update(); temptemp6 = 0; songplaying = 0; }
 					}
 				}
@@ -594,7 +499,7 @@ void bgmtest() {
 					return;
 				}
 				else if (mouse.y >= 0x3D && mouse.y <= 0x64) {
-					if (!temptemp6) { music_play(xbgm_lookup_table2[song]); temptemp6 = 1; songplaying = 1; }
+					if (!temptemp6) { music_play(xbgmlookuptable[song]); temptemp6 = 1; songplaying = 1; }
 					else { famistudio_music_stop(); music_update(); temptemp6 = 0; songplaying = 0; }
 				}
 				else if (mouse.y >= 0x75 && mouse.y <= 0x9C) {
@@ -618,7 +523,7 @@ void bgmtest() {
 			if (joypad1.press_right) { song++; temptemp6 = 0; if (song == song_max) {song = 0;} }
 			if (joypad1.press_left) { if (song == 0) {song = song_max - 1;} else song--; temptemp6 = 0; }
 			if (joypad1.press_a) {
-					if (!temptemp6) { music_play(xbgm_lookup_table2[song]); temptemp6 = 1; songplaying = 1; }
+					if (!temptemp6) { music_play(xbgmlookuptable[song]); temptemp6 = 1; songplaying = 1; }
 					else { famistudio_music_stop(); music_update(); temptemp6 = 0; songplaying = 0; }
 			}					
 		}		
