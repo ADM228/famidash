@@ -5,8 +5,8 @@
 			"lowerText": "MENU",
 			"vsSystemEnabled": false,
 			"nsfData": {
-				"trackTitle": "Menu Theme",
-				"artist": {
+				"trackLabel": "Menu Theme",
+				"trackAuthor": {
 					"original": "RobTop",
 					"cover": "Zenith302"
 				},
@@ -21,8 +21,8 @@
 			"lowerText": "MADNESS",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Stereo Madness",
-				"artist": {
+				"trackLabel": "Stereo Madness",
+				"trackAuthor": {
 					"original": "ForeverBound",
 					"cover": "Zenith302, UserSniper"
 				},
@@ -36,8 +36,8 @@
 			"lowerText": "TRACK",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Back On Track",
-				"artist": {
+				"trackLabel": "Back On Track",
+				"trackAuthor": {
 					"original": "DJVI",
 					"cover": "aquamarine.gay"
 				},
@@ -50,8 +50,8 @@
 			"lowerText": "POLARGEIST",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Polargeist",
-				"artist": {
+				"trackLabel": "Polargeist",
+				"trackAuthor": {
 					"original": "Step",
 					"cover": "UserSniper, Zenith302, Vikrinox"
 				},
@@ -64,8 +64,8 @@
 			"lowerText": "DRY OUT",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Dry Out",
-				"artist": {
+				"trackLabel": "Dry Out",
+				"trackAuthor": {
 					"original": "DJVI",
 					"cover": "UserSniper"
 				},
@@ -79,8 +79,8 @@
 			"lowerText": "BASE",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Base After Base",
-				"artist": {
+				"trackLabel": "Base After Base",
+				"trackAuthor": {
 					"original": "DJVI",
 					"cover": "Zenith302, UserSniper, Vikrinox, alexmush"
 				},
@@ -93,8 +93,8 @@
 			"lowerText": "CANT LET GO",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Cant Let Go ~ Can't Let Go",
-				"artist": {
+				"trackLabel": "Cant Let Go ~ Can't Let Go",
+				"trackAuthor": {
 					"original": "DJVI",
 					"cover": "UserSniper, alexmush"
 				},
@@ -107,8 +107,8 @@
 			"lowerText": "JUMPER",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Jumper",
-				"artist": {
+				"trackLabel": "Jumper",
+				"trackAuthor": {
 					"original": "Waterflame",
 					"cover": "zukinnyk, UserSniper, Zenith302"
 				},
@@ -121,8 +121,8 @@
 			"lowerText": "TIME MACHINE",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Time Machine",
-				"artist": {
+				"trackLabel": "Time Machine",
+				"trackAuthor": {
 					"original": "Waterflame",
 					"cover": "Zenith302, Vikrinox, alexmush"
 				},
@@ -135,8 +135,8 @@
 			"lowerText": "CYCLES",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Cycles",
-				"artist": {
+				"trackLabel": "Cycles",
+				"trackAuthor": {
 					"original": "DJVI",
 					"cover": "aquamarine.gay, alexmush"
 				},
@@ -149,8 +149,8 @@
 			"lowerText": "XSTEP",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "xStep",
-				"artist": {
+				"trackLabel": "xStep",
+				"trackAuthor": {
 					"original": "DJVI",
 					"cover": "Vikrinox, alexmush"
 				},
@@ -163,8 +163,8 @@
 			"lowerText": "CLUTTERFUNK",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Clutterfunk",
-				"artist": {
+				"trackLabel": "Clutterfunk",
+				"trackAuthor": {
 					"original": "Waterflame",
 					"cover": "Zenith302, aquamarine.gay, Vikrinox"
 				},
@@ -178,8 +178,8 @@
 			"lowerText": "EVERYTHING",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Theory Of Everything",
-				"artist": {
+				"trackLabel": "Theory Of Everything",
+				"trackAuthor": {
 					"original": "Dj-Nate",
 					"cover": "leejh20, UserSniper, Vikrinox, Zenith302"
 				},
@@ -193,8 +193,8 @@
 			"lowerText": "ADVENTURES",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Electroman Adventures",
-				"artist": {
+				"trackLabel": "Electroman Adventures",
+				"trackAuthor": {
 					"original": "Waterflame",
 					"cover": "cloud54, UserSniper, alexmush"
 				},
@@ -256,8 +256,8 @@
 			"lowerText": "DECODE",
 			"vsSystemEnabled": true,
 			"nsfData": {
-				"trackTitle": "Decode ~ Endgame",
-				"artist": {
+				"trackLabel": "Decode ~ Endgame",
+				"trackAuthor": {
 					"original": "Waterflame",
 					"cover": "Vikrinox"
 				},
@@ -270,8 +270,8 @@
 			"lowerText": "PRACTICE",
 			"vsSystemEnabled": false,
 			"nsfData": {
-				"trackTitle": "Practice ~ Stay Inside Me",
-				"artist": {
+				"trackLabel": "Practice ~ Stay Inside Me",
+				"trackAuthor": {
 					"original": "OcularNebula",
 					"cover": "UserSniper"
 				},
@@ -387,8 +387,8 @@
 		{
 			"text": "DEATH",
 			"nsfData": {
-				"trackTitle": "Death SFX",
-				"artist": "UserSniper",
+				"trackLabel": "Death SFX",
+				"trackAuthor": "UserSniper",
 				"durationNTSC": 383,
 				"durationPAL": 460
 			}
@@ -396,8 +396,8 @@
 		{
 			"text": "CLICK",
 			"nsfData": {
-				"trackTitle": "Click SFX",
-				"artist": "UserSniper",
+				"trackLabel": "Click SFX",
+				"trackAuthor": "UserSniper",
 				"durationNTSC": 50,
 				"durationPAL": 40
 			}
@@ -405,8 +405,8 @@
 		{
 			"text": "LEVEL COMPLETE",
 			"nsfData": {
-				"trackTitle": "LEVEL COMPLETE! SFX",
-				"artist": "UserSniper",
+				"trackLabel": "LEVEL COMPLETE! SFX",
+				"trackAuthor": "UserSniper",
 				"durationNTSC": 3167,
 				"durationPAL": 3020
 			}
@@ -414,8 +414,8 @@
 		{
 			"text": "COIN",
 			"nsfData": {
-				"trackTitle": "Coin SFX",
-				"artist": "UserSniper",
+				"trackLabel": "Coin SFX",
+				"trackAuthor": "UserSniper",
 				"durationNTSC": 683,
 				"durationPAL": 700
 			}
@@ -423,8 +423,8 @@
 		{
 			"text": "CHEST OPEN",
 			"nsfData": {
-				"trackTitle": "Chest Open SFX",
-				"artist": "UserSniper",
+				"trackLabel": "Chest Open SFX",
+				"trackAuthor": "UserSniper",
 				"durationNTSC": 100,
 				"durationPAL": 120
 			}
@@ -432,8 +432,8 @@
 		{
 			"text": "ORBS",
 			"nsfData": {
-				"trackTitle": "Orbs SFX",
-				"artist": "UserSniper",
+				"trackLabel": "Orbs SFX",
+				"trackAuthor": "UserSniper",
 				"durationNTSC": 683,
 				"durationPAL": 820
 			}
@@ -441,8 +441,8 @@
 		{
 			"text": "DIAMONDS",
 			"nsfData": {
-				"trackTitle": "Diamonds SFX",
-				"artist": "UserSniper",
+				"trackLabel": "Diamonds SFX",
+				"trackAuthor": "UserSniper",
 				"durationNTSC": 683,
 				"durationPAL": 820
 			}
@@ -450,8 +450,8 @@
 		{
 			"text": "EXIT LEVEL",
 			"nsfData": {
-				"trackTitle": "Exit Level SFX",
-				"artist": "UserSniper",
+				"trackLabel": "Exit Level SFX",
+				"trackAuthor": "UserSniper",
 				"durationNTSC": 650,
 				"durationPAL": 680
 			}
@@ -459,8 +459,8 @@
 		{
 			"text": "START LEVEL",
 			"nsfData": {
-				"trackTitle": "Start Level SFX",
-				"artist": "UserSniper",
+				"trackLabel": "Start Level SFX",
+				"trackAuthor": "UserSniper",
 				"durationNTSC": 967,
 				"durationPAL": 920
 			}
@@ -468,8 +468,8 @@
 		{
 			"text": "INVALID",
 			"nsfData": {
-				"trackTitle": "Invalid SFX",
-				"artist": "UserSniper",
+				"trackLabel": "Invalid SFX",
+				"trackAuthor": "UserSniper",
 				"durationNTSC": 633,
 				"durationPAL": 640
 			}
@@ -477,8 +477,8 @@
 		{
 			"text": "ACHIEVEMENT GET",
 			"nsfData": {
-				"trackTitle": "Achievement Get SFX",
-				"artist": "UserSniper",
+				"trackLabel": "Achievement Get SFX",
+				"trackAuthor": "UserSniper",
 				"durationNTSC": 950,
 				"durationPAL": 1140
 			}
@@ -492,8 +492,8 @@
 			"sampleRateNTSC": 4,
 			"sampleRatePAL": 3,
 			"nsfData": {
-				"trackTitle": "Geometry Dash Voice Clip",
-				"artist": "VA: MDK",
+				"trackLabel": "Geometry Dash Voice Clip",
+				"trackAuthor": "VA: MDK",
 				"durationNTSC": 1150,
 				"durationPAL": 1100
 			}
@@ -505,8 +505,8 @@
 			"sampleRateNTSC": 10,
 			"sampleRatePAL": 8,
 			"nsfData": {
-				"trackTitle": "FIRE IN THE HOLE! Voice Clip",
-				"artist": "VA: Joe",
+				"trackLabel": "FIRE IN THE HOLE! Voice Clip",
+				"trackAuthor": "VA: Joe",
 				"durationNTSC": 1650,
 				"durationPAL": 1650
 			}
