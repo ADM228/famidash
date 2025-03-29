@@ -39,7 +39,7 @@
 				"trackTitle": "Back On Track",
 				"artist": {
 					"original": "DJVI",
-					"cover": ""
+					"cover": "aquamarine.gay"
 				},
 				"durationNTSC": 82817,
 				"durationPAL": 99540
@@ -53,7 +53,7 @@
 				"trackTitle": "Polargeist",
 				"artist": {
 					"original": "Step",
-					"cover": ""
+					"cover": "UserSniper, Zenith302, Vikrinox"
 				},
 				"durationNTSC": 90700,
 				"durationPAL": 109000
@@ -67,7 +67,7 @@
 				"trackTitle": "Dry Out",
 				"artist": {
 					"original": "DJVI",
-					"cover": ""
+					"cover": "UserSniper"
 				},
 				"durationNTSC": 81433,
 				"durationPAL": 97880
@@ -82,7 +82,7 @@
 				"trackTitle": "Base After Base",
 				"artist": {
 					"original": "DJVI",
-					"cover": ""
+					"cover": "Zenith302, UserSniper, Vikrinox, alexmush"
 				},
 				"durationNTSC": 85000,
 				"durationPAL": 102160
@@ -96,7 +96,7 @@
 				"trackTitle": "Cant Let Go ~ Can't Let Go",
 				"artist": {
 					"original": "DJVI",
-					"cover": ""
+					"cover": "UserSniper, alexmush"
 				},
 				"durationNTSC": 80750,
 				"durationPAL": 97040
@@ -110,7 +110,7 @@
 				"trackTitle": "Jumper",
 				"artist": {
 					"original": "Waterflame",
-					"cover": ""
+					"cover": "zukinnyk, UserSniper, Zenith302"
 				},
 				"durationNTSC": 86467,
 				"durationPAL": 104100
@@ -124,7 +124,7 @@
 				"trackTitle": "Time Machine",
 				"artist": {
 					"original": "Waterflame",
-					"cover": ""
+					"cover": "Zenith302, Vikrinox, alexmush"
 				},
 				"durationNTSC": 96067,
 				"durationPAL": 115460
@@ -138,7 +138,7 @@
 				"trackTitle": "Cycles",
 				"artist": {
 					"original": "DJVI",
-					"cover": ""
+					"cover": "aquamarine.gay, alexmush"
 				},
 				"durationNTSC": 85933,
 				"durationPAL": 103280
@@ -152,7 +152,7 @@
 				"trackTitle": "xStep",
 				"artist": {
 					"original": "DJVI",
-					"cover": ""
+					"cover": "Vikrinox, alexmush"
 				},
 				"durationNTSC": 82350,
 				"durationPAL": 98980
@@ -166,7 +166,7 @@
 				"trackTitle": "Clutterfunk",
 				"artist": {
 					"original": "Waterflame",
-					"cover": ""
+					"cover": "Zenith302, aquamarine.gay, Vikrinox"
 				},
 				"durationNTSC": 96583,
 				"durationPAL": 116080
@@ -181,7 +181,7 @@
 				"trackTitle": "Theory Of Everything",
 				"artist": {
 					"original": "Dj-Nate",
-					"cover": ""
+					"cover": "leejh20, UserSniper, Vikrinox, Zenith302"
 				},
 				"durationNTSC": 89000,
 				"durationPAL": 106960
@@ -196,7 +196,7 @@
 				"trackTitle": "Electroman Adventures",
 				"artist": {
 					"original": "Waterflame",
-					"cover": ""
+					"cover": "cloud54, UserSniper, alexmush"
 				},
 				"durationNTSC": 87800,
 				"durationPAL": 105520
@@ -259,7 +259,7 @@
 				"trackTitle": "Decode ~ Endgame",
 				"artist": {
 					"original": "Waterflame",
-					"cover": ""
+					"cover": "Vikrinox"
 				},
 				"durationNTSC": 79283,
 				"durationPAL": 95280
@@ -273,7 +273,7 @@
 				"trackTitle": "Practice ~ Stay Inside Me",
 				"artist": {
 					"original": "OcularNebula",
-					"cover": ""
+					"cover": "UserSniper"
 				},
 				"durationNTSC": 239817,
 				"durationPAL": 288380,
@@ -403,7 +403,7 @@
 			}
 		},
 		{
-			"text": "LEVEL$COMPLETE",
+			"text": "LEVEL COMPLETE",
 			"nsfData": {
 				"trackTitle": "LEVEL COMPLETE! SFX",
 				"artist": "UserSniper",
@@ -421,7 +421,7 @@
 			}
 		},
 		{
-			"text": "CHEST$OPEN",
+			"text": "CHEST OPEN",
 			"nsfData": {
 				"trackTitle": "Chest Open SFX",
 				"artist": "UserSniper",
@@ -448,7 +448,7 @@
 			}
 		},
 		{
-			"text": "EXIT$LEVEL",
+			"text": "EXIT LEVEL",
 			"nsfData": {
 				"trackTitle": "Exit Level SFX",
 				"artist": "UserSniper",
@@ -457,7 +457,7 @@
 			}
 		},
 		{
-			"text": "START$LEVEL",
+			"text": "START LEVEL",
 			"nsfData": {
 				"trackTitle": "Start Level SFX",
 				"artist": "UserSniper",
@@ -475,7 +475,7 @@
 			}
 		},
 		{
-			"text": "ACHIEVEMENT$GET",
+			"text": "ACHIEVEMENT GET",
 			"nsfData": {
 				"trackTitle": "Achievement Get SFX",
 				"artist": "UserSniper",
