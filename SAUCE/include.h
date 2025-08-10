@@ -19,6 +19,10 @@
 #include "musicDefines.h" // sound driver C defines
 #include "sfxDefines.h" // sound driver C defines
 
+// Mouse library
+#include "mouse.h"
+
+
 // various game-essential defines
 #include "level_defines.h"
 #include "defines/space_defines.h"
@@ -26,13 +30,8 @@
 #include "defines/physics_defines.h"
 #include "defines/physics_table_defines.cmp.h"
 #pragma rodata-name (pop)
-
-// grounds go here
-#pragma rodata-name (push, "XCD_BANK_05")
-#include "mouse.h"
-//#include "mouse.c"
-#pragma rodata-name (pop)
 #pragma rodata-name (push, GROUND_BANK)
+// grounds go here
 #include "grounddata.h"
 #include "groundlist.h"
 #pragma rodata-name (pop)
@@ -67,12 +66,6 @@
 #include "functions/collision.h"  // collision
 #include "functions/reset_level.h"  // reset the stage
 
-
-
-
-
-
-
 // THE GAME MODE DEFINES //
 
 #include "functions/x_movement.h"
@@ -84,16 +77,15 @@
 #include "gamemodes/gamemode_spider.h"
 #include "gamemodes/gamemode_wave.h"
 
+// MOUSE FUNCTION DEFINES //
+#include "functions/mouse.c"
+
 #endif
 
 // THE MENU STATE DEFINES //
-
 #include "include_menus.h"
 
 // THE GAME STATE DEFINES //
-
-
-
 #if !__THE_ALBUM
 #include "gamestates/state_game.h"
 #include "gamestates/state_lvldone.h"

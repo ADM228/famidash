@@ -45,4 +45,6 @@ extern uint8_t mouse_mask;
 #define MOUSE_LEFT 0x40
 #define MOUSE_RIGHT 0x80
 
+void mouse_and_cursor();
+
 #endif // mouse.h
