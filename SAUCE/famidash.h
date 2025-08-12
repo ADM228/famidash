@@ -523,6 +523,9 @@ uint8_t donotresetrng;
 
 uint8_t player_invis;
 
+void * mouse_table_ptr;
+void * mouse_jumptable_ptr;
+
 extern uint8_t famistudio_song_speed;
 
 extern uint16_t min_scroll_y;

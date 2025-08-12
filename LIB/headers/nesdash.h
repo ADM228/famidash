@@ -171,6 +171,8 @@ void __fastcall__ _famistudio_sfx_clear_channel(unsigned int args);
  */
 void update_currplayer_table_idx();
 
+uint8_t process_mouse_events();
+
 #define low_word(a) *((uint16_t*)&a)
 #define high_word(a) *((uint16_t*)&a+1)
 

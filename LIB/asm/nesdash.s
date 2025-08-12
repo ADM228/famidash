@@ -256,9 +256,9 @@ _init_rld:
 	STA _no_parallax	;	Parallax disable
 	INCW ptr1			;__
 
-	LDA (ptr1),y		;
+	LDA (ptr1),y			;
 	STA _force_platformer	;	force platformer
-	INCW ptr1			;__
+	INCW ptr1				;__
 
 	LDA (ptr1),y			;
 	STA _current_deco_type	;	Deco type
@@ -4296,6 +4296,273 @@ vert_skip:
 	STA	_currplayer_table_idx	;__	Store the result
 	RTS
 .endproc
+
+
+; uint8_t process_mouse_events();
+.segment "XCD_BANK_05"
+
+.import _mouse_table_ptr, _mouse_jumptable_ptr
+
+.export _process_mouse_events
+.proc _process_mouse_events
+	
+
+	inst_ptr = ptr1
+	jumptable_ptr = ptr2
+
+	start:
+		lda	_mouse_table_ptr+1
+		beq	return
+		sta	inst_ptr+1
+		lda	_mouse_table_ptr
+		sta	inst_ptr
+
+		lda	_mouse_jumptable_ptr+1
+		sta	jumptable_ptr+1
+		lda	_mouse_jumptable_ptr
+		sta	jumptable_ptr
+
+		ldy	#0
+
+	load_inst:
+		; For now I'm hoping the tables don't exceed 256 bytes
+		; If they do that ruins the entire point of this framework
+		lda	(inst_ptr),	y
+		
+		beq	return
+		
+		cmp	#$F0
+		bcs	cond_jump
+		
+		cmp	#$B0
+		bcs	out_jump
+
+		sty	tmp1
+		clc
+		adc	tmp1
+		tay
+		bcc	load_inst
+		; If overflowed, it's better to return
+		lda #1
+	return23:
+		and	#3
+	return:
+	out_jump:
+		rts
+
+	cond_jump:
+		tax
+		lda	cond_jump_table_hi-$F0,	x	;
+		pha								;
+		lda	cond_jump_table_lo-$F0,	x	;	Get condition, use RTS trick
+		pha								;
+		rts								;__
+
+	cond_connected:
+		lda	#%10000000
+		bne	cond_comp	;__	BRA
+	cond_Lrel:
+		lda	#%01000000
+		bne	cond_comp	;__	BRA
+	cond_Rrel:
+		lda	#%00100000
+		bne	cond_comp	;__	BRA
+	cond_Lprs:
+		lda	#%00010000
+		bne	cond_comp	;__	BRA
+	cond_Rprs:
+		lda	#%00001000
+		; fallthrough
+	cond_comp:
+		iny
+		and	mouse+0
+		beq	:+
+			iny
+		:	jmp	load_inst
+
+	cond_Left:
+		lda	#%10000000
+		bne	cond_raw	;__	BRA
+	cond_Right:
+		lda	#%01000000
+		; fallthrough
+	cond_raw:
+		iny
+		and	mouse+1
+		beq	:+
+			iny
+		:	jmp	load_inst
+
+	cond_sensitivity:
+		lda	mouse+1
+		and	#%00110000
+		iny
+		cmp	(inst_ptr),	y
+		bne	inc1_jmp
+	inc2_jmp:
+		iny
+	inc1_jmp:
+		iny
+		jmp	load_inst
+
+	xGEQ:
+		lda	mouse+3
+		bcs	condGEQ	;__	BRA
+	yGEQ:
+		lda	mouse+2
+		; fallthrough
+	condGEQ:
+		iny
+		cmp	(inst_ptr),	y
+		bcs	inc2_jmp
+		bcc	inc1_jmp
+
+	xLES:
+		lda	mouse+3
+		bcs	condLES	;__	BRA
+	yLES:
+		lda	mouse+2
+		; fallthrough
+	condLES:
+		iny
+		cmp	(inst_ptr),	y
+		bcs	inc1_jmp
+		bcc	inc2_jmp
+
+	xRNG:
+		lda	mouse+3
+		bcs	condRNG	;__	BRA
+	yRNG:
+		lda	mouse+2
+		; fallthrough
+	condRNG:
+		iny
+		sec
+		sbc	(inst_ptr),	y
+		iny
+		sbc	(inst_ptr),	y
+		bcs	inc1_jmp
+		bcc	inc2_jmp
+
+
+	cond_jump_table_lo:
+		.byte	<(cond_connected-1)
+		.byte	<(cond_Lrel-1),	<(cond_Rrel-1)
+		.byte	<(cond_Lprs-1),	<(cond_Rprs-1)
+		.byte	<(cond_Left-1),	<(cond_Right-1)
+		.byte	<(cond_sensitivity-1)
+
+		.byte	<(xGEQ-1),	<(xLES-1),	<(xRNG-1)
+		.byte	<(yGEQ-1),	<(yLES-1),	<(yRNG-1)
+		.byte	<(return23-1),	<(return23-1)
+	cond_jump_table_hi:
+		.byte	>(cond_connected-1)
+		.byte	>(cond_Lrel-1),	>(cond_Rrel-1)
+		.byte	>(cond_Lprs-1),	>(cond_Rprs-1)
+		.byte	>(cond_Left-1),	>(cond_Right-1)
+		.byte	>(cond_sensitivity-1)
+
+		.byte	>(xGEQ-1),	>(xLES-1),	>(xRNG-1)
+		.byte	>(yGEQ-1),	>(yLES-1),	>(yRNG-1)
+		.byte	>(return23-1),	>(return23-1)
+
+
+.endproc
+
+.macro ifXLessThan val, do_then
+.byte	$F8,	val,	do_then
+.endmacro
+
+.macro ifXMoreEqThan val, do_then
+.byte	$F9,	val,	do_then
+.endmacro
+
+.macro ifXOutOfRange min, max, do_then
+.byte	$FA,	min,	max-min+1,	do_then
+.endmacro
+
+.macro ifYLessThan val, do_then
+.byte	$FB,	val,	do_then
+.endmacro
+
+.macro ifYMoreEqThan val, do_then
+.byte	$FC,	val,	do_then
+.endmacro
+
+.macro ifYOutOfRange min, max, do_then
+.byte	$FD,	min,	max-min+1,	do_then
+.endmacro
+
+.export _settings_mouse_ptr
+_settings_mouse_ptr:
+	return0 = 0
+	return2 = $FE
+	return3 = $FF
+
+	; If no left press, return 0
+	.byte	$F3,	0
+	; F8: X>=
+	; F9: X<
+	; FA: X in range
+	; FB: Y>=
+	; FC: Y<
+	; FD: Y in range
+	; FE: return with code 2
+	; FF: return with code 3
+	ifXOutOfRange $1D,$DE, return0
+	ifYOutOfRange $24,$C5, return0
+	ifXLessThan $2D, (@exit_loc - @l001)+1
+	@l001:
+	ifYOutOfRange $24,$2C, 3
+	.byte	$C0,	0
+	ifYOutOfRange $34,$3C, 3
+	.byte	$C0,	1
+	ifYOutOfRange $44,$4C, 3
+	.byte	$C0,	2
+	ifYOutOfRange $54,$5C, 3
+	.byte	$C0,	3
+	ifYOutOfRange $64,$6C, 3
+	.byte	$C0,	4
+	ifYOutOfRange $74,$7C, 3
+	.byte	$C0,	5
+	ifYOutOfRange $84,$8C, 3
+	.byte	$C0,	6
+	ifYOutOfRange $94,$9C, 3
+	.byte	$C0,	7
+	@exit_loc:
+	ifYOutOfRange $BC,$C4, return0
+	.byte	return2
+
+;if (mouse.left_press) {
+;	if (mouse.x >= 0x2D && mouse.x <= 0xDD) {
+;		if (mouse.y >= 0x24 && mouse.y <= 0x2C) {
+;			settingvalue = 0; set_settings();
+;		}
+;		else if (mouse.y >= 0x34 && mouse.y <= 0x4C) {
+;			settingvalue = 1; set_settings();
+;		}
+;		else if (mouse.y >= 0x44 && mouse.y <= 0x4C) {
+;			settingvalue = 2; set_settings();
+;		}
+;		else if (mouse.y >= 0x54 && mouse.y <= 0x5C) {
+;			settingvalue = 3; set_settings();
+;		}
+;		else if (mouse.y >= 0x64 && mouse.y <= 0x6C) {
+;			settingvalue = 4; set_settings();
+;		}
+;		else if (mouse.y >= 0x74 && mouse.y <= 0x7C) {
+;			settingvalue = 5; set_settings();
+;		}
+;		else if (mouse.y >= 0x84 && mouse.y <= 0x8C) {
+;			settingvalue = 6; set_settings();
+;		}
+;		else if (mouse.y >= 0x94 && mouse.y <= 0x9C) {
+;			settingvalue = 7; set_settings();
+;		}
+;	}
+;	if ((mouse.x >= 0x1D && mouse.x <= 0xDD) && (mouse.y >= 0xBC && mouse.y <= 0xC4)) {		
+;		break;
+;	}
 
 ; void set_tile_banks();
 ; 
