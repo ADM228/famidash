@@ -38,66 +38,7 @@ void state_soundtest() {
 		 // read the first controller
 		kandoframecnt++;
 		if (kandoframecnt & 1 && mouse_timer) mouse_timer--;	
-		if (mouse.left_press) {
-			if ((mouse.x >= 0x63 && mouse.x <= 0x8C)) {
-				if (mouse.y >= 0x34 && mouse.y <= 0x3A) {		
-					settingvalue = 0;
-				}
-				else if ((mouse.y >= 0x6C && mouse.y <= 0x73)) {		
-					settingvalue = 1;
-				}
-			}
-			if ((mouse.x >= 0x2E && mouse.x <= 0xCC)) {
-				if ((mouse.y >= 0xB4 && mouse.y <= 0xBB)) {		
-					if (settingvalue == 1) { sfx_play(sfx, 0); }
-					else {
-						if (!temptemp6) { music_play(xbgmlookuptable[song]); temptemp6 = 1; songplaying = 1; }
-						else { famistudio_music_stop(); music_update(); temptemp6 = 0; songplaying = 0; }
-					}
-				}
-				if ((mouse.y >= 0xA4 && mouse.y <= 0xAB)) {
-					menu_music = song; sfx_play(sfx_orbs, 0);
-				}
-			}
-			if ((mouse.x >= 0x56 && mouse.x <= 0xA5) && (mouse.y >= 0x24 && mouse.y <= 0x2B)) {		
-				code_checker();
-				if (gameState == STATE_FUNSETTINGS) return;
-			}
-			if ((mouse.y >= 0x4E && mouse.y <= 0x5C)) {
-				if ((mouse.x >= 0x24 && mouse.x <= 0x2C)) {		
-					if (song == 0) {song = song_max - 1;} else song--; temptemp6 = 0; settingvalue = 0;
-				}
-				else if ((mouse.x >= 0xCC && mouse.x <= 0xD4)) {		
-					temptemp6 = 0; song++; if (song == song_max) {song = 0;} settingvalue = 0;
-				}
-			}
-			if ((mouse.y >= 0x86 && mouse.y <= 0x93)) {
-
-				if ((mouse.x >= 0x24 && mouse.x <= 0x2C)) {		
-					if (sfx == 0) {sfx = sfx_max - 1;} else sfx--; settingvalue = 1;
-				}
-				else if ((mouse.x >= 0xCC && mouse.x <= 0xD4)) {		
-					sfx++; if (sfx == sfx_max) {sfx= 0;} settingvalue = 1;
-				}
-			}
-			if ((mouse.x >= 0x35 && mouse.x <= 0xC4)) {
-				if (mouse.y >= 0xC4 && mouse.y <= 0xCD) {		
-					tmp3--;			
-					one_vram_buffer(' ', NTADR_A(11, 7));
-					one_vram_buffer(' ', NTADR_A(11, 14));
-					menuMusicCurrentlyPlaying = 1;
-					gameState = STATE_MENU;
-					return;
-				}
-				else if (mouse.y >= 0x3D && mouse.y <= 0x64) {
-					if (!temptemp6) { music_play(xbgmlookuptable[song]); temptemp6 = 1; songplaying = 1; }
-					else { famistudio_music_stop(); music_update(); temptemp6 = 0; songplaying = 0; }
-				}
-				else if (mouse.y >= 0x75 && mouse.y <= 0x9C) {
-					sfx_play(sfx, 0);
-				}
-			}
-		}			
+		full_process_mouse_events();
 	__A__ = idx16_load_hi_NOC(xbgmtextsUpper, song);
 	if (__A__) draw_padded_text(xbgmtextsUpper[song & 0x7F], xbgmtextsUpperSize[song], 18, NTADR_A(7, 8));
 	else one_vram_buffer_horz_repeat('$', 17, NTADR_A(7, 8));
@@ -182,7 +123,6 @@ void code_checker() {
 	if (tmp3) sfx_play(sfx_invalid, 0);	
 }
 
-#undef sfx
 
 const char TEXT_debug_mode[] = "DEBUG MODE ENABLED";
 
@@ -220,3 +160,72 @@ const unsigned char bgmtestscreen[482]={
 0x01,0x00
 };
 
+uint8_t bgm_mouse0() {
+	if (settingvalue == 1) { sfx_play(sfx, 0); }
+	else {
+		if (!temptemp6) {
+			music_play(xbgmlookuptable[song]); temptemp6 = 1; songplaying = 1; }
+		else { famistudio_music_stop(); music_update(); temptemp6 = 0; songplaying = 0; }
+	}
+	return 0;
+}
+uint8_t bgm_mouse1() {
+	menu_music = song; sfx_play(sfx_orbs, 0);
+	return 0;
+}
+uint8_t bgm_mouse2() {
+	tmp3--;			
+	one_vram_buffer(' ', NTADR_A(11, 7));
+	one_vram_buffer(' ', NTADR_A(11, 14));
+	menuMusicCurrentlyPlaying = 1;
+	gameState = STATE_MENU;
+	return 3;	// Mouse: return
+}
+uint8_t bgm_mouse3() {
+	if (!temptemp6) { music_play(xbgmlookuptable[song]); temptemp6 = 1; songplaying = 1; }
+	else { famistudio_music_stop(); music_update(); temptemp6 = 0; songplaying = 0; }
+	return 0;
+}
+uint8_t bgm_mouse4() {
+	sfx_play(sfx, 0);
+	return 0;
+}
+uint8_t bgm_mouse5() {
+	code_checker();
+	return (gameState == STATE_FUNSETTINGS) ? 3 : 0;
+}
+uint8_t bgm_mouse6() {
+	settingvalue = __A__;
+	return 0;
+}
+uint8_t bgm_mouse7() {
+	if (song == 0) {song = song_max - 1;} else song--; temptemp6 = 0; settingvalue = 0;
+	return 0;
+}
+uint8_t bgm_mouse8() {
+	temptemp6 = 0; song++; if (song == song_max) {song = 0;} settingvalue = 0;
+	return 0;
+}
+uint8_t bgm_mouse9() {
+	if (sfx == 0) {sfx = sfx_max - 1;} else sfx--; settingvalue = 1;
+	return 0;
+}
+uint8_t bgm_mouseA() {
+	sfx++; if (sfx == sfx_max) {sfx= 0;} settingvalue = 1;
+	return 0;
+}
+
+const void * const bgmtest_mouse_jumptable[] = {
+	bgm_mouse0,
+	bgm_mouse1,
+	bgm_mouse2,
+	bgm_mouse3,
+	bgm_mouse4,
+	bgm_mouse5,
+	bgm_mouse6,
+	bgm_mouse7,
+	bgm_mouse8,
+	bgm_mouse9,
+	bgm_mouseA
+};
+#undef sfx

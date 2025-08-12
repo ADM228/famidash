@@ -149,3 +149,49 @@ return3 = $FF
 	ifXOutOfRange $E5,$EF, return0
 	.byte	$B1		; levelinc();
 .endproc
+
+
+; extern void bgmtest_mouse_inst;
+.segment "XCD_BANK_05"
+
+.export _bgmtest_mouse_inst
+.proc _bgmtest_mouse_inst
+
+	; If no left press, return 0
+	.byte	$F3,	0
+	ifXOutOfRange $2E,$CB, (@sideBtnCheck - @centerCheck)+1
+	@centerCheck:
+	ifYOutOfRange $B4,$BB, 2
+	.byte $B0
+	ifYOutOfRange $A4,$AB, 2
+	.byte $B1
+
+	ifXOutOfRange $35,$C4, return0
+	ifYOutOfRange $C4,$CD, 2
+	.byte $B2
+	ifYOutOfRange $3D,$64, 2
+	.byte $B3
+	ifYOutOfRange $75,$9C, 2
+	.byte $B4
+
+	ifXOutOfRange $56,$A5, return0
+	ifYOutOfRange $24,$2B, 2
+	.byte $B5
+
+	ifXOutOfRange $63,$8C, return0
+	ifYOutOfRange $34,$3A, 3
+	.byte $C6, 0
+	ifYOutOfRange $6C,$73, return0
+	.byte $C6, 1
+
+	@sideBtnCheck:
+	ifXOutOfRange $24,$D4, return0
+	ifYOutOfRange $4E,$5C, (@bottomSideBtnCheck - @topSideBtnCheck)+1
+	@topSideBtnCheck:
+	ifXLessThan	$80, $B7
+	.byte $B8
+	@bottomSideBtnCheck:
+	ifYOutOfRange $86,$93, return0
+	ifXLessThan	$80, $B9
+	.byte $BA
+.endproc
