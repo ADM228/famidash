@@ -381,7 +381,6 @@ finish:
 
 	.include "all_level_data.s"
 	.include "all_sprite_data.s"
-;	.include "level_header.s"
 	.include "all_level_table.s"
 	
 	.include "mapper.s"
@@ -389,6 +388,7 @@ finish:
 	.include "nesdash.s"
 	.include "nesdoug.s"
 	.include "lz.s"
+	.include "mousetables.s"
 
 CURSED_MUSIC_ENABLE = 1
 .include "famistudio_ca65.s"

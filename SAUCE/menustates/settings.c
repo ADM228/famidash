@@ -1,6 +1,5 @@
 void mouse_and_cursor();
 void set_settings();
-void set_settings_mouse();
 
 #include "defines/charmap/mainmenu_charmap.h"
 
@@ -18,11 +17,8 @@ void set_settings_mouse();
 #define SETTINGS_BTN_PALFULLSPD	8
 #define SETTINGS_BTN_WIPESAVE	9
 
-extern void settings_mouse_ptr;
-
-const void * const settings_mouse_jumptable[] = {
-	set_settings_mouse
-};
+extern void settings_mouse_inst;
+const void * const settings_mouse_jumptable[];
 
 void state_settings() {
 	mmc3_set_2kb_chr_bank_0(0xFF);
@@ -41,7 +37,7 @@ void state_settings() {
 
 	settingvalue = 0;
 
-	mouse_table_ptr = &settings_mouse_ptr;
+	mouse_table_ptr = &settings_mouse_inst;
 	mouse_jumptable_ptr = settings_mouse_jumptable;
 
 	ppu_on_all();
@@ -132,9 +128,10 @@ void state_settings() {
 }
 
 const uint8_t xbgmlookuptable[];
-void set_settings_mouse() {
+uint8_t set_settings_mouse() {
 	settingvalue = __A__;
 	set_settings();
+	return 0;
 }
 
 void set_settings() {
@@ -165,3 +162,7 @@ void set_settings() {
 			break;
 	}
 }	
+
+const void * const settings_mouse_jumptable[] = {
+	set_settings_mouse
+};

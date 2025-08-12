@@ -17,6 +17,9 @@ const unsigned char gameboy_text_size[];
 
 const unsigned char funsettingscreen[];
 
+extern void fun_settings_mouse_inst;
+const void * const fun_settings_mouse_jumptable[];
+
 void state_funsettings() {
 	mmc3_set_2kb_chr_bank_0(0xFF);
 	mmc3_set_2kb_chr_bank_1(MOUSEBANK);
@@ -30,8 +33,10 @@ void state_funsettings() {
 	//kandotemp4 = 0;
 	settingvalue = 0; 
 
-	ppu_on_all();
+	mouse_table_ptr = &fun_settings_mouse_inst;
+	mouse_jumptable_ptr = fun_settings_mouse_jumptable;
 
+	ppu_on_all();
 	pal_fade_in();
 	
 	while (1) {
@@ -39,77 +44,55 @@ void state_funsettings() {
 		oam_clear();
 		crossPRGBankJump0(check_if_music_stopped);
 		mouse_and_cursor();
-		 // read the first controller
-		if (mouse.left_press) {
-			if (mouse.x >= 0x2D && mouse.x <= 0xDD) {
-				if (mouse.y >= 0x24 && mouse.y <= 0x2C) {
-					settingvalue = 0; set_fun_settings();
-				}
-				else if (mouse.y >= 0x34 && mouse.y <= 0x3C) {
-					settingvalue = 1; set_fun_settings();
-				}
-				else if (mouse.y >= 0x44 && mouse.y <= 0x4C) {
-					settingvalue = 2; set_fun_settings();
-				}
-				else if (mouse.y >= 0x54 && mouse.y <= 0x5C) {
-					settingvalue = 3; set_fun_settings();
-				}
-				else if (mouse.y >= 0x64 && mouse.y <= 0x6C) {
-					settingvalue = 4; set_fun_settings();
-				}
-				else if (mouse.y >= 0x74 && mouse.y <= 0x7C) {
-					settingvalue = 5; set_fun_settings();
-				}
-				else if (mouse.y >= 0x84 && mouse.y <= 0x8C) {
-					settingvalue = 6; set_fun_settings();
-				}
-				else if (mouse.y >= 0x94 && mouse.y <= 0x9C) {
-					settingvalue = 7; set_fun_settings();
-				}
-				else if (mouse.y >= 0xA4 && mouse.y <= 0xAC) {
-					settingvalue = 8; set_fun_settings();
-				}
-
-			}
-			if ((mouse.x >= 0x1D && mouse.x <= 0xDD) && (mouse.y >= 0xBC && mouse.y <= 0xC4)) {		
-				gameState = last_gameState;
-				return;
-			}
-
-		}	
-		if (invisible) 	one_vram_buffer('g', NTADR_A(26, 5));	// believe it or not, 
-		else 	one_vram_buffer('f', NTADR_A(26, 5));	// this is auto optimized by cc65
-
-		if ((options & platformer)) 	one_vram_buffer('g', NTADR_A(26, 7));	// believe it or not, 
-		else 	one_vram_buffer('f', NTADR_A(26, 7));	// this is auto optimized by cc65
-
-		if (retro_mode) 	one_vram_buffer('g', NTADR_A(26, 9));	// believe it or not, 
-		else 	one_vram_buffer('f', NTADR_A(26, 9));	// this is auto optimized by cc65
-
-		if (discomode) 	one_vram_buffer('g', NTADR_A(26, 11));	// believe it or not, 
-		else 	one_vram_buffer('f', NTADR_A(26, 11));	// this is auto optimized by cc65
 		
-		if (invisblocks) 	one_vram_buffer('g', NTADR_A(26, 13));	// believe it or not, 
-		else 	one_vram_buffer('f', NTADR_A(26, 13));	// this is auto optimized by cc65
+		if (invisible)	one_vram_buffer('g', NTADR_A(26, 5));
+		else	one_vram_buffer('f', NTADR_A(26, 5));
+
+		if ((options & platformer))	one_vram_buffer('g', NTADR_A(26, 7));
+		else	one_vram_buffer('f', NTADR_A(26, 7));
+
+		if (retro_mode)	one_vram_buffer('g', NTADR_A(26, 9));
+		else	one_vram_buffer('f', NTADR_A(26, 9));
+
+		if (discomode)	one_vram_buffer('g', NTADR_A(26, 11));
+		else	one_vram_buffer('f', NTADR_A(26, 11));
 		
-		if (cam_seesaw) 	one_vram_buffer('g', NTADR_A(26, 15));	// believe it or not, 
-		else 	one_vram_buffer('f', NTADR_A(26, 15));	// this is auto optimized by cc65
-
-		if (cursedmusic & 0x40) 	one_vram_buffer('g', NTADR_A(26, 19));	// believe it or not, 
-		else 	one_vram_buffer('f', NTADR_A(26, 19));	// this is auto optimized by cc65
+		if (invisblocks)	one_vram_buffer('g', NTADR_A(26, 13));
+		else	one_vram_buffer('f', NTADR_A(26, 13));
 		
-		if (practice_music_sync) 	one_vram_buffer('g', NTADR_A(26, 21));	// believe it or not, 
-		else 	one_vram_buffer('f', NTADR_A(26, 21));	// this is auto optimized by cc65
+		if (cam_seesaw)	one_vram_buffer('g', NTADR_A(26, 15));
+		else	one_vram_buffer('f', NTADR_A(26, 15));
+
+		if (cursedmusic & 0x40)	one_vram_buffer('g', NTADR_A(26, 19));
+		else	one_vram_buffer('f', NTADR_A(26, 19));
+		
+		if (practice_music_sync)	one_vram_buffer('g', NTADR_A(26, 21));
+		else	one_vram_buffer('f', NTADR_A(26, 21));
 
 
-//		if (cursedmusic) 	one_vram_buffer('g', NTADR_A(26, 21));	// believe it or not, 
-//		else 	one_vram_buffer('f', NTADR_A(26, 21));	// this is auto optimized by cc65
+//		if (cursedmusic) 	one_vram_buffer('g', NTADR_A(26, 21));
+//		else 	one_vram_buffer('f', NTADR_A(26, 21));
 		
 		__A__ = idx16_load_hi_NOC(gameboytexts, gameboy_mode);
-		if (__A__) { draw_padded_text(gameboytexts[gameboy_mode & 0x7F], gameboy_text_size[gameboy_mode], 8, NTADR_A(19, 17)); 	one_vram_buffer('g', NTADR_A(26, 17));	}// believe it or not, 
-		else { one_vram_buffer_horz_repeat('$', 8, NTADR_A(19, 17)); one_vram_buffer('f', NTADR_A(26, 17)); }
+		if (__A__) {
+			draw_padded_text(
+				gameboytexts[gameboy_mode & 0x7F],
+				gameboy_text_size[gameboy_mode], 8, NTADR_A(19, 17));
+			one_vram_buffer('g', NTADR_A(26, 17));	
+		} else {
+			one_vram_buffer_horz_repeat('$', 8, NTADR_A(19, 17));
+			one_vram_buffer('f', NTADR_A(26, 17));
+		}
 
+		one_vram_buffer('X'-0x1B, NTADR_A(26, 11));
+		if (discomode & 0x02) { one_vram_buffer('2' - 0x20, NTADR_A(25, 11)); }
+		else if (discomode & 0x04) { one_vram_buffer('3' - 0x20, NTADR_A(25, 11));}
+		else if (discomode & 0x08) { one_vram_buffer('4' - 0x20, NTADR_A(25, 11));}
+		else if (discomode & 0x10) { one_vram_buffer('5' - 0x20, NTADR_A(25, 11));}
+		else if (discomode & 0x01) { one_vram_buffer('1' - 0x20, NTADR_A(25, 11));}
+		else { one_vram_buffer(' '-0x01, NTADR_A(25, 11)); one_vram_buffer(0x0F, NTADR_A(26, 11)); }
 
+		full_process_mouse_events();
 
 		tmp1 = settingvalue;
 
@@ -130,14 +113,6 @@ void state_funsettings() {
 			one_vram_buffer('c', NTADR_A(4, 5)+((settingvalue<<8)>>2));
 		}
 
-		one_vram_buffer('X'-0x1B, NTADR_A(26, 11));
-		if (discomode & 0x02) { one_vram_buffer('2' - 0x20, NTADR_A(25, 11)); }
-		else if (discomode & 0x04) { one_vram_buffer('3' - 0x20, NTADR_A(25, 11));}
-		else if (discomode & 0x08) { one_vram_buffer('4' - 0x20, NTADR_A(25, 11));}
-		else if (discomode & 0x10) { one_vram_buffer('5' - 0x20, NTADR_A(25, 11));}
-		else if (discomode & 0x01) { one_vram_buffer('1' - 0x20, NTADR_A(25, 11));}
-		else { one_vram_buffer(' '-0x01, NTADR_A(25, 11)); one_vram_buffer(0x0F, NTADR_A(26, 11)); }
-
 		if (joypad1.press & (PAD_START | PAD_A)) {
 			set_fun_settings();
 		}
@@ -156,6 +131,16 @@ void state_funsettings() {
 	}
 }
 
+uint8_t restore_lastGamestate() {
+	gameState = last_gameState;
+	return 3;	// Return
+}
+
+uint8_t set_fun_settings_mouse() {
+	settingvalue = __A__;
+	set_fun_settings();
+	return 0;
+}
 void set_fun_settings() {
 	switch (settingvalue) {
 		case 0x00: invisible ^= 1; break;
@@ -176,6 +161,11 @@ void set_fun_settings() {
 		case 0x08: practice_music_sync ^= 0x01; break;
 	};
 }
+
+const void * const fun_settings_mouse_jumptable[] = {
+	set_fun_settings_mouse,
+	restore_lastGamestate
+};
 
 const unsigned char gameboytext1[]="  GREY";
 const unsigned char gameboytext2[]="   RED";
