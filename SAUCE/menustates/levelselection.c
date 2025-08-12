@@ -1,9 +1,9 @@
 void draw_both_progress_bars();
 
-void leveldec();
-void levelinc();
+uint8_t leveldec();
+uint8_t levelinc();
 void refreshmenu();
-void start_the_level();
+uint8_t start_the_level();
 
 void check_if_music_stopped();
 void dec_mouse_timer();
@@ -11,6 +11,9 @@ void loop_routine_update();
 
 const uint8_t xbgmlookuptable[];
 const uint8_t lvlselect_irq_table[];
+
+extern void levelselection_mouse_inst;
+const void * const levelselection_mouse_jumptable[];
 
 #include "defines/charmap/mainmenu_charmap.h"
 
@@ -71,8 +74,10 @@ void state_levelselect() {
 	#endif
 	menuMusicCurrentlyPlaying = 1;
 
-	ppu_on_all();
+	mouse_table_ptr = &levelselection_mouse_inst;
+	mouse_jumptable_ptr = levelselection_mouse_jumptable;
 
+	ppu_on_all();
 	pal_fade_in();
 
 	while (1){
@@ -89,29 +94,8 @@ void state_levelselect() {
 		
 		high_byte(tmp8) = low_byte(tmp8)^0xff;
 		
-		if (mouse.left_press) {
-			if (mouse.y >= 0x6E && mouse.y <= 0x7B) {
-				if (mouse.x >= 0x09 && mouse.x <= 0x15) {
-					drawBarFlag = 2;
-					leveldec();
-				}
-				else if (mouse.x >= 0xE5 && mouse.x <= 0xEF) {
-					drawBarFlag = 2;
-					levelinc();				
-				}
-			}
-			if (((mouse.y >= 0x3D && mouse.y <= 0x6C) && (mouse.x >= 0x2D && mouse.x <= 0xCC))) {
-				start_the_level();
-				return;				
-			}
-			
-		}
-		// no longer required because of the menu option 
-		//if (twoplayer) one_vram_buffer('d', NTADR_A(31, 2));
-		//else one_vram_buffer('e', NTADR_A(31, 2));
-
-		//if (pad[0] & PAD_UP && pad_new[0] & PAD_SELECT) { twoplayer ^= 0x01; sfx_play(sfx_coin, 0); }
-
+		full_process_mouse_events();
+		
 		#if __VS_SYSTEM
 			menutimer++;
 			if (menutimer >= 2000) {
@@ -139,14 +123,12 @@ void state_levelselect() {
 		}
 		
 		if (joypad1.press_right){
-			drawBarFlag = 2;
 			levelinc();
 			#if __VS_SYSTEM
 				menutimer = 0;
 			#endif
 		}
 		if (joypad1.press_left){
-			drawBarFlag = 2;
 			leveldec();
 			#if __VS_SYSTEM
 				menutimer = 0;
@@ -165,7 +147,8 @@ void state_levelselect() {
 
 }
 
-void leveldec() {
+uint8_t leveldec() {
+	drawBarFlag = 2;
 	--level;
 	low_byte(tmp8) = 0xff;
 	tmp4 = 0;
@@ -180,9 +163,11 @@ void leveldec() {
 				level = LEVEL_COUNT2 - 1;
 	}
 	crossPRGBankJump0(refreshmenu);
+	return 0;
 }			
 
-void levelinc() {
+uint8_t levelinc() {
+	drawBarFlag = 2;
 	++level;
 	low_byte(tmp8) = 0xff;
 	tmp4 = 1;
@@ -195,9 +180,10 @@ void levelinc() {
 		if (level >= LEVEL_COUNT2) level = LEVEL_COUNT;
 	}
 	crossPRGBankJump0(refreshmenu);
+	return 0;
 }
 
-void start_the_level() {
+uint8_t start_the_level() {
 	sfx_play(sfx_start_level, 0);
 	famistudio_music_stop();
 	if (tmp4) edit_irq_table(high_byte(tmp8),2);
@@ -210,7 +196,14 @@ void start_the_level() {
 	} while (++tmpA < 30);
 	gameState = STATE_GAME;
 	menuMusicCurrentlyPlaying = 0;
+	return 3;	// Mouse: return
 }
+
+const void * const levelselection_mouse_jumptable[] = {
+	leveldec,
+	levelinc,
+	start_the_level
+};
 
 const uint8_t lvlselect_irq_table[] = {
 	31,

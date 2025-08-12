@@ -128,3 +128,24 @@ return3 = $FF
 	ifYOutOfRange $BC,$C4, return0
 	.byte	$B1
 .endproc
+
+
+; extern void levelselection_mouse_inst;
+.segment "XCD_BANK_03"
+
+.export _levelselection_mouse_inst
+.proc _levelselection_mouse_inst
+
+	; If no left press, return 0
+	.byte	$F3,	0
+	ifYOutOfRange $3D,$6C, (@incdeccheck-@startlevelcheck)+1
+	@startlevelcheck:
+	ifXOutOfRange $2D,$CC, 2
+	.byte	$B2		; start_the_level();
+	@incdeccheck:
+	ifYOutOfRange $6E,$7B, return0
+	ifXOutOfRange $09,$15, 2
+	.byte	$B0		; leveldec();
+	ifXOutOfRange $E5,$EF, return0
+	.byte	$B1		; levelinc();
+.endproc
