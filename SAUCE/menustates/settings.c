@@ -1,5 +1,6 @@
 void mouse_and_cursor();
 void set_settings();
+void set_settings_mouse();
 
 #include "defines/charmap/mainmenu_charmap.h"
 
@@ -19,6 +20,10 @@ void set_settings();
 
 extern void settings_mouse_ptr;
 
+const void * const settings_mouse_jumptable[] = {
+	set_settings_mouse
+};
+
 void state_settings() {
 	mmc3_set_2kb_chr_bank_0(0xFF);
 	mmc3_set_2kb_chr_bank_1(MOUSEBANK);
@@ -37,6 +42,7 @@ void state_settings() {
 	settingvalue = 0;
 
 	mouse_table_ptr = &settings_mouse_ptr;
+	mouse_jumptable_ptr = settings_mouse_jumptable;
 
 	ppu_on_all();
 	pal_fade_in();
@@ -79,7 +85,7 @@ void state_settings() {
 
 		tmp1 = settingvalue;
 
-		crossPRGBankJump0(process_mouse_events);
+		full_process_mouse_events();
 
 		if (joypad1.press & (PAD_RIGHT | PAD_DOWN)) {
 			if (settingvalue == settingCount)
@@ -126,6 +132,10 @@ void state_settings() {
 }
 
 const uint8_t xbgmlookuptable[];
+void set_settings_mouse() {
+	settingvalue = __A__;
+	set_settings();
+}
 
 void set_settings() {
 	switch (settingvalue) {

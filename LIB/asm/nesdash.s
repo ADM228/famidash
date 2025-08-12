@@ -4358,7 +4358,6 @@ vert_skip:
 	return23:
 		and	#3
 	return:
-	out_jump:
 		rts
 
 	cond_jump:
@@ -4368,6 +4367,48 @@ vert_skip:
 		lda	cond_jump_table_lo-$F0,	x	;	Get condition, use RTS trick
 		pha								;
 		rts								;__
+
+	out_jump:
+		tax
+		cpx	#$C0	;	C0-CF: call function with 1 byte of arguments
+		bcc @getPtr	;__
+			iny					;
+			lda	(inst_ptr),	y	;	Load 1st byte of arguments
+			sta	ptr3+0			;__
+		
+		cpx	#$D0	;	D0-DF: call function with 2 bytes of arguments
+		bcc	@getPtr	;__
+			iny					;
+			lda	(inst_ptr),	y	;	Load 2nd byte of arguments
+			sta	ptr3+1			;__
+
+		cpx	#$E0	;	E0-EF: call function with 4 bytes of arguments
+		bcc	@getPtr	;__
+			iny					;
+			lda	(inst_ptr),	y	;	Load 3rd byte of arguments
+			sta	sreg+0			;__
+			iny					;
+			lda	(inst_ptr),	y	;	Load 4th byte of arguments
+			sta	sreg+1			;__
+
+		@getPtr:
+			txa			;
+			and	#$0F	;	Get index (0-15 × 2)
+			asl			;
+			tay			;__
+			lda	(jumptable_ptr), y
+			sta	ptr4+0
+			iny
+			lda	(jumptable_ptr), y
+			sta	ptr4+1
+			cpx	#$C0	;	C0-CF: call function with 1 byte of arguments
+			bcc @jump	;__
+				lda	ptr3+0	;__	Load 1st byte of arguments
+				cpx	#$D0	;	D0-DF: call function with 2 bytes of arguments
+				bcc	@jump	;__
+					ldx	ptr3+1	;__	Load 2nd byte of arguments
+		@jump:
+			jmp	(ptr4)
 
 	cond_connected:
 		lda	#%10000000
@@ -4521,25 +4562,27 @@ _settings_mouse_ptr:
 	; FE: return with code 2
 	; FF: return with code 3
 	ifXOutOfRange $1D,$DE, return0
-	ifYOutOfRange $24,$C5, return0
+	ifYOutOfRange $14,$C5, return0
 	ifXLessThan $2D, (@exit_loc - @l001)+1
 	@l001:
-	ifYOutOfRange $24,$2C, 3
+	ifYOutOfRange $14,$1C, 3
 	.byte	$C0,	0
-	ifYOutOfRange $34,$3C, 3
+	ifYOutOfRange $24,$2C, 3
 	.byte	$C0,	1
-	ifYOutOfRange $44,$4C, 3
+	ifYOutOfRange $34,$3C, 3
 	.byte	$C0,	2
-	ifYOutOfRange $54,$5C, 3
+	ifYOutOfRange $44,$4C, 3
 	.byte	$C0,	3
-	ifYOutOfRange $64,$6C, 3
+	ifYOutOfRange $54,$5C, 3
 	.byte	$C0,	4
-	ifYOutOfRange $74,$7C, 3
+	ifYOutOfRange $64,$6C, 3
 	.byte	$C0,	5
-	ifYOutOfRange $84,$8C, 3
+	ifYOutOfRange $74,$7C, 3
 	.byte	$C0,	6
-	ifYOutOfRange $94,$9C, 3
+	ifYOutOfRange $84,$8C, 3
 	.byte	$C0,	7
+	ifYOutOfRange $94,$9C, 3
+	.byte	$C0,	8
 	@exit_loc:
 	ifYOutOfRange $BC,$C4, return0
 	.byte	return2
